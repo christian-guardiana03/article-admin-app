@@ -23,11 +23,12 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Edit User Form</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Article Form</h6>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('articles.store') }}">
+            <form method="POST" action="{{ route('articles.update', $article->id) }}">
                 @csrf
+                @method('PATCH')
                 @include('articles._partials.forms')
                 <button type="submit" class="btn btn-primary" id="create-article">Save</button>
             </form>

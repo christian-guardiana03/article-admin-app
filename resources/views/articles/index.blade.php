@@ -21,7 +21,7 @@
                         <tr>
                             <th>Image</th>
                             <th>Title</th>
-                            <th>Link</th>
+                            <th style="width: 25%;">Link</th>
                             <th>Writer</th>
                             <th>Editor</th>
                             <th>Status</th>
@@ -38,10 +38,10 @@
                                 <td><a href="{{ $article->link }}" target="_blank">{{ $article->link }}</a></td>
                                 <td>{{ $article->writer ? $article->writer->getFullName() : '' }}</td>
                                 <td>{{ $article->editor ? $article->editor->getFullName() : '' }}</td>
-                                <td>{{ $article->status  }}</td>
+                                <td><span class="badge {{ $article->state == 'Published' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $article->status  }}</span></td>
                                 <td>
                                     <a href="{{ route('articles.show', $article->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                    @if (Auth::user()->can('edit article'));
+                                    @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                         <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                     @endif
                                 </td>

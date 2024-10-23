@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionSeeder::class);
 
         $user = User::factory()->create([
-            'name' => 'Editor',
+            'firstname' => 'John',
+            'lastname' => 'Editor',
             'email' => 'editor@gmail.com',
             'status' => 'Active',
             'password' => Hash::make('password')

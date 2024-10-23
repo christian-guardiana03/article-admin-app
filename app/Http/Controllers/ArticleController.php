@@ -68,8 +68,10 @@ class ArticleController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Article $article)
-    {
-        return view('articles.edit', compact('article'));
+    {   
+        $companies = Company::all();
+        
+        return view('articles.edit', compact('article', 'companies'));
     }
 
     /**
@@ -77,7 +79,23 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'image' => 'required|url',
+            'title' => 'required',
+            'link' => 'required|url',
+            'date' => 'required|date',
+            'company_id' => 'required'
+        ]);
+
+        $article->title = $request->title;
+        $article->image = $request->image;
+        $article->link = $request->link;
+        $article->company_id = $request->company_id;
+        $article->date = $request->date;
+        $article->content = $request->content;
+        $article->save();
+
+        return redirect()->route('articles.index')->with('success', 'Article Updated Successfully!');
     }
 
     /**

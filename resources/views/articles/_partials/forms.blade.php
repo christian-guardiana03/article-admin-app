@@ -47,7 +47,7 @@
         <select name="company_id" id="company_id" class="form-control">
             <option disabled selected>Select Company</option>
             @foreach ($companies as $company)
-                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                <option value="{{ $company->id }}" {{ $article->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
             @endforeach
         </select>
         @if ($errors->has('company_id'))
@@ -58,6 +58,6 @@
     </div>
     <div class="col-md-12 mb-3">
         <label for="content" class="form-label">Content</label>
-        <textarea name="content" id="content" rows="5" class="form-control"></textarea>
+        <textarea name="content" id="content" rows="5" class="form-control">{{ $article->content }}</textarea>
     </div>
 </div>  
