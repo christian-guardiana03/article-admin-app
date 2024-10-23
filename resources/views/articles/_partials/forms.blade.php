@@ -58,6 +58,6 @@
     </div>
     <div class="col-md-12 mb-3">
         <label for="content" class="form-label">Content</label>
-        <textarea name="content" id="content" rows="5" class="form-control">{{ $article->content }}</textarea>
+        <textarea name="content" id="content" rows="5" class="form-control">{{ isset($article->content) ? $article->content : '' }}</textarea>
     </div>
 </div>  
