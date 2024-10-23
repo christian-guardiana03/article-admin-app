@@ -57,7 +57,14 @@ class User extends Authenticatable
     }
 
     public function getFullName()
-{
-    return $this->firstname . ' ' . $this->lastname;
-}
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getRole()
+    {   
+        $roles = $this->getRoleNames();
+        $rolenName = isset($roles[0]) ? $roles[0] : '';
+        return $rolenName;
+    }
 }

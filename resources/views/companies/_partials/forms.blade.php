@@ -10,10 +10,20 @@
             <option value="Active" {{ isset($company) && $company->status == 'Active' ? 'selected' : '' }}>Active</option>
             <option value="Inactive" {{ isset($company) && $company->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
         </select>
+        @if ($errors->has('status'))
+            <p class="text-danger">
+                {{ $errors->first('status') }}
+            </p>
+        @endif
     </div>
     <div class="col-md-6 mb-3">
         <label for="photo" class="form-label">Logo</label>
-        <input type="file" class="form-control" name="photo" id="photo" aria-describedby="photo" onchange="previewImage(event)" required>
+        <input type="file" class="form-control" name="photo" id="photo" aria-describedby="photo" onchange="previewImage(event)">
+        @if ($errors->has('photo'))
+            <p class="text-danger">
+                {{ $errors->first('photo') }}
+            </p>
+        @endif
     </div>
     <div class="col-md-6 mb-3">
         @php

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Carbon\Carbon;
 
 class ArticleController extends Controller
 {
@@ -32,7 +33,7 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         $request->validate([
             'image' => 'required|url',
             'title' => 'required',
@@ -61,7 +62,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -93,9 +94,16 @@ class ArticleController extends Controller
         $article->company_id = $request->company_id;
         $article->date = $request->date;
         $article->content = $request->content;
+
+        $message = 'Article Updated Successfully!';
+        if ($request->submit && $request->submit == 'publish') {
+            $article->status = 'Published';
+            $article->editor_id = auth()->user()->id;
+            $message = 'Article is now published!';
+        }
         $article->save();
 
-        return redirect()->route('articles.index')->with('success', 'Article Updated Successfully!');
+        return redirect()->route('articles.index')->with('success', $message);
     }
 
     /**

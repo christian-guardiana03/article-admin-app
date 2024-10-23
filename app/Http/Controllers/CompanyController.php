@@ -34,6 +34,7 @@ class CompanyController extends Controller
     {
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required'
         ]);
 
         if ($request->file('photo')) {
@@ -80,7 +81,8 @@ class CompanyController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required'
         ]);
 
         if ($request->file('photo')) {
@@ -96,6 +98,11 @@ class CompanyController extends Controller
             $company = Company::find($id);
             $company->name = $request->name;
             $company->logo_path = $imagePath;
+            $company->status = $request->status;
+            $company->save();
+        } else {
+            $company = Company::find($id);
+            $company->name = $request->name;
             $company->status = $request->status;
             $company->save();
         }

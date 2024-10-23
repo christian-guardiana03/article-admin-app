@@ -25,7 +25,7 @@
                             <th>Writer</th>
                             <th>Editor</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th style="width: 120px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,7 @@
                                 <td><a href="{{ $article->link }}" target="_blank">{{ $article->link }}</a></td>
                                 <td>{{ $article->writer ? $article->writer->getFullName() : '' }}</td>
                                 <td>{{ $article->editor ? $article->editor->getFullName() : '' }}</td>
-                                <td><span class="badge {{ $article->state == 'Published' ? 'bg-success' : 'bg-warning text-dark' }}">{{ $article->status  }}</span></td>
+                                <td><span class="badge {{ $article->status == 'Published' ? 'bg-success text-light' : 'bg-warning text-dark' }}">{{ $article->status  }}</span></td>
                                 <td>
                                     <a href="{{ route('articles.show', $article->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                     @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))

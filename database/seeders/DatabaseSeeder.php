@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Article;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,19 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
-        $this->call(RolePermissionSeeder::class);
+        // $this->call(RolePermissionSeeder::class);
 
-        $user = User::create([
-            'firstname' => 'John',
-            'lastname' => 'Editor',
-            'email' => 'editor@gmail.com',
-            'status' => 'Active',
-            'password' => Hash::make('password')
-        ]);
+        // $user = User::create([
+        //     'firstname' => 'John',
+        //     'lastname' => 'Editor',
+        //     'email' => 'editor@gmail.com',
+        //     'status' => 'Active',
+        //     'password' => Hash::make('password')
+        // ]);
 
-        $role = Role::findByName('Editor');
-        $user->assignRole($role);
+        // $role = Role::findByName('Editor');
+        // $user->assignRole($role);
     }
 }

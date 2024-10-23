@@ -30,7 +30,10 @@
                 @csrf
                 @method('PATCH')
                 @include('articles._partials.forms')
-                <button type="submit" class="btn btn-primary" id="create-article">Save</button>
+                <button type="submit" name="submit" value="save" class="btn btn-primary" id="create-article">Save</button>
+                @if (Auth::user()->getRole() == 'Editor')
+                    <button type="submit" name="submit" value="publish" class="btn btn-success" id="create-article">Publish</button>
+                @endif
             </form>
         </div>
     </div>

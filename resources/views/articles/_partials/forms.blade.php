@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-4 mb-3">
         @php
-            $image = 'img/Placeholder_view_vector.svg.png';
+            $image = isset($article) ? $article->image : 'img/Placeholder_view_vector.svg.png';
         @endphp
         <img id="imagePreview" src="{{ asset($image) }}"  width="100" height="100" alt="Image Preview">
     </div>
@@ -47,7 +47,7 @@
         <select name="company_id" id="company_id" class="form-control">
             <option disabled selected>Select Company</option>
             @foreach ($companies as $company)
-                <option value="{{ $company->id }}" {{ $article->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+                <option value="{{ $company->id }}" {{ isset($article) && $article->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
             @endforeach
         </select>
         @if ($errors->has('company_id'))
