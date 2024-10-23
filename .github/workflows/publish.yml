@@ -37,6 +37,12 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
+      
+      - name: Install all dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build # The build command of your project
 
       - name: Prepare the application
         run: |
