@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleVersion;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use Carbon\Carbon;
@@ -42,7 +43,7 @@ class ArticleController extends Controller
             'company_id' => 'required'
         ]);
 
-        Article::create([
+        $article = Article::create([
             'image' => $request->image,
             'title' => $request->title,
             'link' => $request->link,
@@ -51,6 +52,12 @@ class ArticleController extends Controller
             'company_id' => $request->company_id,
             'writer_id' => auth()->user()->id,
             'content' => $request->content
+        ]);
+
+        // create version
+        ArticleVersion::create([
+            'article_id' => $article->id,
+            'version' => 0.1
         ]);
 
 
@@ -102,6 +109,25 @@ class ArticleController extends Controller
             $message = 'Article is now published!';
         }
         $article->save();
+
+        $changedAttributes = $article->wasChanged();
+
+        // update version
+        if ($changedAttributes) {
+            $articleVersion = ArticleVersion::where('article_id', $article->id)->orderBy('created_at', 'desc')->first();
+            if (!$articleVersion) {
+                ArticleVersion::create([
+                    'article_id' => $article->id,
+                    'version' => 0.1
+                ]);
+            } else {
+                $version = $articleVersion->version + 0.1;
+                ArticleVersion::create([
+                    'article_id' => $article->id,
+                    'version' => $version
+                ]);
+            }
+        }
 
         return redirect()->route('articles.index')->with('success', $message);
     }

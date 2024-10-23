@@ -1,5 +1,45 @@
 <x-app-layout>
 
+
+    <x-slot name="article_version">
+        @if ($article->versions)
+            @php
+                $latest_version = [];
+                $created_at = '';
+                if (isset($article->versions[0])) {
+                    $latest_version = isset($article->versions[0]) ? $article->versions[0] : [];
+                    $created_at = Carbon\Carbon::parse($latest_version->created_at)->format('M d, Y');
+                }
+            @endphp
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="font-weight-bold row">
+                    <div class="col-md-2">
+                        <i class="fa fa-star mr-4"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="text-truncate">{{ !empty($latest_version) ? $latest_version->version : '' }}</div>
+                        <div class="small text-gray-500 mr-5">
+                            {{ $created_at }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            @foreach ($article->versions as $key => $version)
+            @php 
+                if ($key == 0) continue;
+                $created_at = Carbon\Carbon::parse($version->created_at)->format('M d, Y');
+            @endphp
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div>
+                    <div class="text-truncate">{{ $version->version}}</div>
+                    <div class="small text-gray-500">{{$created_at}}</div>
+                </div>
+            </a>
+            @endforeach
+
+        @endif
+    </x-slot>
+
     <x-slot name="custom_css">
         <style>
             .hidden {

@@ -90,6 +90,7 @@
             </div>
         </li>
 
+        @if (isset($article_version))
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="versionDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -101,26 +102,11 @@
                 <h6 class="dropdown-header">
                     Version Logs
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="font-weight-bold row">
-                        <div class="col-md-2">
-                            <i class="fa fa-star mr-4"></i>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="text-truncate">4.4.1</div>
-                            <div class="small text-gray-500 mr-5">Emily Fowler · 58m</div>
-                        </div>
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div>
-                        <div class="text-truncate">4.4.0</div>
-                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                    </div>
-                </a>
+                {{ $article_version }}
                 <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a> -->
             </div>
         </li>
+        @endif
 
         <div class="topbar-divider d-none d-sm-block"></div>
 

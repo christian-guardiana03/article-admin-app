@@ -34,4 +34,8 @@ class Article extends Model
     public function company () {
         return $this->hasOne(Company::class, 'id', 'company_id');
     }
+
+    public function versions () {
+        return $this->hasMany(ArticleVersion::class, 'article_id')->orderBy('created_at', 'desc');
+    }
 }

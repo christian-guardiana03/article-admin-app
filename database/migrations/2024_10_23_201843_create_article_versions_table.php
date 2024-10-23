@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_version', function (Blueprint $table) {
+        Schema::create('article_versions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('article_id')->constrained(table: 'articles')->onUpdate('cascade')->onDelete('cascade');
+            $table->float('version', 10, 1);
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_version');
+        Schema::dropIfExists('article_versions');
     }
 };

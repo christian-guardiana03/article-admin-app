@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <x-slot name="header">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -69,7 +68,7 @@
                                     <th>Writer</th>
                                     <th>Editor</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th style="width: 120px !important;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +96,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $unpublished->links() }}
+                        {{ $published->links() }}
                     </div>
                 </div>
             </div>
