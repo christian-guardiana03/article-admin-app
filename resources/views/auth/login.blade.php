@@ -39,9 +39,9 @@
                                 </button>
                             </form>
                             <hr>
-                            <div class="text-center">
+                            {{--<div class="text-center">
                                 <a class="small" href="{{ route('register') }}">Create an Account!</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
