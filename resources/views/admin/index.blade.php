@@ -66,6 +66,7 @@
                                         <h5 class="card-title">{{ $publish->title }}</h5>
                                         <p class="card-text"><span class="badge {{ $publish->status == 'Published' ? 'bg-success text-light' : 'bg-warning text-dark' }}">{{ $publish->status  }}</span></p>
                                         <p class="card-text">
+                                            <small class="text-muted">Link:&nbsp;<a href="{{ $publish->link }}" target="_blank">{{ $publish->link }}</a></small><br>
                                             <small class="text-muted">Writer:&nbsp;{{ $publish->writer ? $publish->writer->getFullName() : '' }}</small><br>
                                             <small class="text-muted">Editor:&nbsp;{{ $publish->editor ? $publish->editor->getFullName() : '' }}</small><br>
                                             <small class="text-muted">Created on:&nbsp;{{ $created_at }}</small>
