@@ -7,7 +7,7 @@
                 $created_at = '';
                 if (isset($article->versions[0])) {
                     $latest_version = isset($article->versions[0]) ? $article->versions[0] : [];
-                    $created_at = Carbon\Carbon::parse($latest_version->created_at)->format('M d, Y');
+                    $created_at = Carbon\Carbon::parse($latest_version->created_at)->format('M d, Y h:i A');
                 }
             @endphp
             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -24,18 +24,17 @@
                 </div>
             </a>
             @foreach ($article->versions as $key => $version)
-            @php 
-                if ($key == 0) continue;
-                $created_at = Carbon\Carbon::parse($version->created_at)->format('M d, Y');
-            @endphp
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div>
-                    <div class="text-truncate">{{ $version->version}}</div>
-                    <div class="small text-gray-500">{{$created_at}}</div>
-                </div>
-            </a>
+                @php 
+                    if ($key == 0) continue;
+                    $created_at = Carbon\Carbon::parse($version->created_at)->format('M d, Y h:i A');
+                @endphp
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div>
+                        <div class="text-truncate">{{ $version->version}}</div>
+                        <div class="small text-gray-500">{{$created_at}}</div>
+                    </div>
+                </a>
             @endforeach
-
         @endif
     </x-slot>
 

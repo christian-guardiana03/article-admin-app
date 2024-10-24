@@ -105,9 +105,13 @@ class ArticleController extends Controller
         $message = 'Article Updated Successfully!';
         if ($request->submit && $request->submit == 'publish') {
             $article->status = 'Published';
-            $article->editor_id = auth()->user()->id;
             $message = 'Article is now published!';
         }
+
+        if (auth()->user()->getRole() == 'Editor') {
+            $article->editor_id = auth()->user()->id;
+        }
+
         $article->save();
 
         $changedAttributes = $article->wasChanged();
