@@ -33,7 +33,7 @@
     <li class="nav-item {{ Route::is('articles.*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('articles.index') }}">
             <i class="fas fa-fw fa-sticky-note"></i>
-            <span>Articles</span></a>
+            <span>All Media</span></a>
     </li>
 
     <!-- Divider -->
