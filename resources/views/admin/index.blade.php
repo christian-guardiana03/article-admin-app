@@ -41,7 +41,7 @@
                                         <p class="card-text">
                                             <small>
                                                 <a href="{{ route('articles.show', $unpublish->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                                @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
+                                                @if (Auth::user()->can('edit article') || ($unpublish->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                                     <a href="{{ route('articles.edit', $unpublish->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endif
                                             </small>
@@ -77,7 +77,7 @@
                                         <p class="card-text">
                                             <small>
                                                 <a href="{{ route('articles.show', $publish->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                                @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
+                                                @if (Auth::user()->can('edit article') || ($publish->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                                     <a href="{{ route('articles.edit', $publish->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endif
                                             </small>
