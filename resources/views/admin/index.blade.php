@@ -12,7 +12,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link custom-navs active" id="Nav1" data-bs-toggle="tab" href="#Tab1">{{ Auth::user()->getRoleNames()[0] == 'Writer' ? 'For Edit' : 'For Publish' }}&nbsp;<span class="badge badge-info">{{ $published->count() }}</span></a></li>
+                <li class="nav-item"><a class="nav-link custom-navs active" id="Nav1" data-bs-toggle="tab" href="#Tab1">{{ Auth::user()->getRoleNames()[0] == 'Writer' ? 'For Edit' : 'For Publish' }}&nbsp;<span class="badge badge-info">{{ $unpublished->count() }}</span></a></li>
                 <li class="nav-item"><a class="nav-link custom-navs" data-bs-toggle="tab" href="#Tab2">Published&nbsp;<span class="badge badge-info">{{ $published->count() }}</span></a></li>
             </ul>
         </div>
@@ -41,7 +41,7 @@
                                         <p class="card-text">
                                             <small>
                                                 <a href="{{ route('articles.show', $unpublish->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                                @if ($unpublish->status == 'For Edit' && (Auth::user()->can('edit article') || Auth::user()->can('edit unpublish article')))
+                                                @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                                     <a href="{{ route('articles.edit', $unpublish->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endif
                                             </small>
@@ -77,7 +77,7 @@
                                         <p class="card-text">
                                             <small>
                                                 <a href="{{ route('articles.show', $publish->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                                @if ($publish->status == 'For Edit' && (Auth::user()->can('edit article') || Auth::user()->can('edit unpublish article')))
+                                                @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                                     <a href="{{ route('articles.edit', $publish->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endif
                                             </small>

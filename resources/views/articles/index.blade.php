@@ -41,7 +41,7 @@
                                 <td><span class="badge {{ $article->status == 'Published' ? 'bg-success text-light' : 'bg-warning text-dark' }}">{{ $article->status  }}</span></td>
                                 <td>
                                     <a href="{{ route('articles.show', $article->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                    @if ($article->status == 'For Edit' && (Auth::user()->can('edit article') || Auth::user()->can('edit unpublish article')))
+                                    @if (Auth::user()->can('edit article') || ($article->status == 'For Edit' && Auth::user()->can('edit unpublish article')))
                                         <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                     @endif
                                 </td>
